@@ -103,7 +103,7 @@
     <div class="group-box-1">
       <h1>AccomRes</h1>
       <p>Your subtitle goes here</p>
-	    <div id="response-container"></div>
+	<div id="response-container"></div>
     </div>
     <!-- Group Box 2: Posts list (to be populated dynamically) -->
     <div class="group-box-2">
@@ -130,10 +130,18 @@
 
 	<script src="https://js.puter.com/v2/"></script>
 <script>
-    puter.ai.chat("What are the benefits of reserving student achievements as a website?")
-        .then(response => {
-            document.getElementById("response-container").innerText = response;
-        });
+    function updateResponse() {
+        puter.ai.chat("What are the benefits of exercise?")
+            .then(response => {
+                document.getElementById("response-container").innerText = response;
+            });
+    }
+
+    // Call the function immediately
+    updateResponse();
+
+    // Call the function every 10 seconds (10000 milliseconds)
+    setInterval(updateResponse, 10000);
 </script>
 </body>
 </html>
