@@ -1,17 +1,130 @@
-Test test test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accomplishment Reserver</title>
+  <style>
+    /* Reset margins and paddings */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+	  height: 100%;
+	  background: linear-gradient(to bottom, #fafad4, #d4b01f);
+    }
+    /* Unscrollable (fixed) header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    header .title {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    header .buttons button {
+      margin-left: 10px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 1em;
+    }
+    /* Main content offset to clear fixed header */
+    main {
+      margin-top: 60px;
+      padding: 50px;
+    }
+    /* Group Box 1: Background image container */
+    .group-box-1 {
+      background-image: url("images/gold-trophy-award-dark-background_71582-163.jpg");
+      background-size: cover;
+      background-position: fixed;
+      padding: 60px 50px;
+      color: #fff;
+      text-shadow: 1px 1px 2px #000;
+      margin-bottom: 20px;
+	  border-radius: 20px;
+    }
+    /* Group Box 2: Solid color container */
+    .group-box-2 {
+      background-color: #e0e0e0;
+      padding: 20px;
+	  border-radius: 20px;
+    }
+    /* Fixed footer styling */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40px;
+      background-color: #f5f5f5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      box-shadow: 0 -1px 3px rgba(0,0,0,0.1);
+      font-size: 0.9em;
+    }
+    /* Invisible table for footer names */
+    footer .names-table {
+      border-collapse: collapse;
+    }
+    footer .names-table td {
+      border: none;
+      padding: 0 5px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="title">Accomplishment Reserver</div>
+    <div class="buttons">
+      <button type="button">Create Post</button>
+      <button type="button">Create Account</button>
+      <button type="button">Login</button>
+    </div>
+  </header>
 
+  <!-- Main Content -->
+  <main>
+    <!-- Group Box 1: Title and Subtitle with background image -->
+    <div class="group-box-1">
+      <h1>AccomRes</h1>
+      <p>Your subtitle goes here</p>
+    </div>
+    <!-- Group Box 2: Posts list (to be populated dynamically) -->
+    <div class="group-box-2">
+      <p>Posts will be loaded here from the external accdb file.</p>
+    </div>
+  </main>
 
-Accom
-
-Res
-
-<b>Test</b>
-<hr>
-<h1>Test</h1>
-
-<br><br>I like to test
-<hr>
-<br>List
-<hr>Post
-<br>Post
-<br>Post
+  <!-- Footer -->
+  <footer>
+    <div class="left">BSCS-3 (2nd Sem)</div>
+    <div class="right">
+      <table class="names-table">
+        <tr>
+			<td>Created by:</td>
+		</tr>
+          <td>Justine Angelo A. Gino,</td>
+          <td>Marzel Carreon,</td>
+          <td>Hazel,</td>
+          <td>Maria Marcelo</td>
+        </tr>
+      </table>
+    </div>
+  </footer>
+</body>
+</html>
