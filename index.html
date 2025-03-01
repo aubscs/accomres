@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,8 +9,8 @@
       margin: 0;
       padding: 0;
       font-family: sans-serif;
-	  height: 100%;
-	  background: linear-gradient(to bottom, #fafad4, #d4b01f);
+      height: 100%;
+      background: linear-gradient(to bottom, #fafad4, #d4b01f);
     }
     /* Unscrollable (fixed) header */
     header {
@@ -53,13 +52,13 @@
       color: #fff;
       text-shadow: 1px 1px 2px #000;
       margin-bottom: 20px;
-	  border-radius: 20px;
+      border-radius: 20px;
     }
     /* Group Box 2: Solid color container */
     .group-box-2 {
       background-color: #e0e0e0;
       padding: 20px;
-	  border-radius: 20px;
+      border-radius: 20px;
     }
     /* Fixed footer styling */
     footer {
@@ -84,6 +83,73 @@
       border: none;
       padding: 0 5px;
     }
+    
+    /* Create Account Modal Styling */
+    #createAccountModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      width: 90%;
+      max-width: 400px;
+    }
+    
+    .modal-content h2 {
+      margin-top: 0;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    
+    .form-group input[type="email"],
+    .form-group input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    
+    .form-group input[type="checkbox"] {
+      margin-right: 5px;
+    }
+    
+    .notification {
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 0.9em;
+    }
+    
+    .button-group {
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+    .button-group button {
+      margin-left: 10px;
+      padding: 8px 12px;
+      cursor: pointer;
+      background: none;
+      border: 1px solid #333;
+      border-radius: 3px;
+    }
   </style>
 </head>
 <body>
@@ -92,7 +158,8 @@
     <div class="title">Accomplishment Reserver</div>
     <div class="buttons">
       <button type="button">Create Post</button>
-      <button type="button">Create Account</button>
+      <!-- Updated button with proper id and type -->
+      <button id="btnOpenCreateAccount" type="button">Create Account</button>
       <button type="button">Login</button>
     </div>
   </header>
@@ -103,13 +170,165 @@
     <div class="group-box-1">
       <h1>AccomRes</h1>
       <p>Your subtitle goes here</p>
-	<div id="response-container"></div>
     </div>
     <!-- Group Box 2: Posts list (to be populated dynamically) -->
     <div class="group-box-2">
-      <p>Posts will be loaded here from the external accdb file.</p>
+      <!-- Group Box 2: Achievement List -->
+	<div class="group-box-2">
+	  <div class="achievement-list">
+		<div class="achievement-item" data-modal="achievementModal1" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #fff; cursor: pointer;">
+		  <div class="achievement-content" style="flex: 1;">
+			<div class="achievement-title" style="font-weight: bold;">NCAA Men's Basketball Championship</div>
+			<div class="achievement-text" style="font-size: 0.9em;">The Arellano University Chiefs clinched a landmark NCAA championship...</div>
+		  </div>
+		  <div class="achievement-image">
+			<img src="https://via.placeholder.com/100" alt="Basketball Achievement" style="width: 100px; height: auto;">
+		  </div>
+		</div>
+		<hr>
+		<div class="achievement-item" data-modal="achievementModal2" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #fff; cursor: pointer;">
+		  <div class="achievement-content" style="flex: 1;">
+			<div class="achievement-title" style="font-weight: bold;">Top Legal Education Honor</div>
+			<div class="achievement-text" style="font-size: 0.9em;">AU's School of Law has produced topnotchers in the Philippine Bar Exams...</div>
+		  </div>
+		  <div class="achievement-image">
+			<img src="https://via.placeholder.com/100" alt="Legal Education Honor" style="width: 100px; height: auto;">
+		  </div>
+		</div>
+		<hr>
+		<div class="achievement-item" data-modal="achievementModal3" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #fff; cursor: pointer;">
+		  <div class="achievement-content" style="flex: 1;">
+			<div class="achievement-title" style="font-weight: bold;">Outstanding Community Service</div>
+			<div class="achievement-text" style="font-size: 0.9em;">Recognized for its impactful community outreach initiatives...</div>
+		  </div>
+		  <div class="achievement-image">
+			<img src="https://via.placeholder.com/100" alt="Community Service" style="width: 100px; height: auto;">
+		  </div>
+		</div>
+	  </div>
+	</div>
+
+	<!-- Achievement Modal 1 -->
+<div id="achievementModal1" class="achievement-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 4000; justify-content: center; align-items: center;">
+  <div class="modal-content" style="position: relative; max-width: 600px; max-height: 80%; overflow-y: auto; padding: 20px; background: #f5f5f5; border-radius: 5px;">
+    <span class="close-button" style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 1.5em;">&times;</span>
+    <h2 style="margin-top: 0;">NCAA Men's Basketball Championship</h2>
+    <div class="modal-image-box" style="margin: 10px 0;">
+      <img src="https://via.placeholder.com/600x300" alt="Basketball" style="width: 100%; height: auto; object-fit: cover;">
+    </div>
+    <div class="modal-body" style="margin-top: 20px;">
+      <p>Detailed information about the NCAA Men's Basketball Championship victory of Arellano University. This achievement marks a historic milestone as the Chiefs demonstrated exceptional teamwork and skill, setting a new benchmark in collegiate sports.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Achievement Modal 2 -->
+<div id="achievementModal2" class="achievement-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 4000; justify-content: center; align-items: center;">
+  <div class="modal-content" style="position: relative; max-width: 600px; max-height: 80%; overflow-y: auto; padding: 20px; background: #f5f5f5; border-radius: 5px;">
+    <span class="close-button" style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 1.5em;">&times;</span>
+    <h2 style="margin-top: 0;">Top Legal Education Honor</h2>
+    <div class="modal-image-box" style="margin: 10px 0;">
+      <img src="https://via.placeholder.com/600x300" alt="Legal Education" style="width: 100%; height: auto; object-fit: cover;">
+    </div>
+    <div class="modal-body" style="margin-top: 20px;">
+      <p>AU's School of Law has consistently produced topnotchers in the Philippine Bar Exams, reflecting its commitment to excellence and rigorous legal education standards.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Achievement Modal 3 -->
+<div id="achievementModal3" class="achievement-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 4000; justify-content: center; align-items: center;">
+  <div class="modal-content" style="position: relative; max-width: 600px; max-height: 80%; overflow-y: auto; padding: 20px; background: #f5f5f5; border-radius: 5px;">
+    <span class="close-button" style="position: absolute; top: 10px; right: 10px; cursor: pointer; font-size: 1.5em;">&times;</span>
+    <h2 style="margin-top: 0;">Outstanding Community Service</h2>
+    <div class="modal-image-box" style="margin: 10px 0;">
+      <img src="https://via.placeholder.com/600x300" alt="Community Service" style="width: 100%; height: auto; object-fit: cover;">
+    </div>
+    <div class="modal-body" style="margin-top: 20px;">
+      <p>Recognized for its impactful community outreach initiatives, Arellano University has received national honors for fostering social development and empowering local communities.</p>
+    </div>
+  </div>
+</div>
+
     </div>
   </main>
+  
+  <!-- Create Account Modal Container -->
+  <div id="createAccountModal">
+    <div class="modal-content">
+      <h2>Create Account</h2>
+      <div class="form-group">
+        <label for="txtemail">Email:</label>
+        <input type="email" id="txtemail" name="txtemail">
+      </div>
+      <div class="form-group">
+        <label for="txtpassword">Password:</label>
+        <input type="password" id="txtpassword" name="txtpassword">
+      </div>
+      <div class="form-group">
+        <input type="checkbox" id="cbshowpassword" label="cbshowpassword">Show Password</input>
+      </div>
+      <div class="button-group">
+        <button type="button" id="btnCreateAccount">Create Account</button>
+        <button type="button" id="btnCancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Confirmation Modal -->
+  <div id="confirmationModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 3000; justify-content: center; align-items: center;">
+    <div class="modal-content" style="max-width: 300px;">
+      <h3>Confirmation</h3>
+      <p>Are you sure you want to create the account?</p>
+      <div class="button-group">
+        <button type="button" id="btnYes">Yes</button>
+        <button type="button" id="btnNo">No</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Login Modal -->
+	<div id="loginModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 3000; justify-content: center; align-items: center;">
+	  <div class="modal-content" style="max-width: 400px;">
+		<h2>Login</h2>
+		<div class="form-group">
+		  <label for="loginEmail">Email:</label>
+		  <input type="email" id="loginEmail" name="loginEmail">
+		</div>
+		<div class="form-group">
+		  <label for="loginPassword">Password:</label>
+		  <input type="password" id="loginPassword" name="loginPassword">
+		</div>
+		<div class="button-group">
+		  <button type="button" id="btnLogin">Login</button>
+		  <button type="button" id="btnLoginCancel">Cancel</button>
+		</div>
+	  </div>
+	</div>
+
+	<!-- Create Post Modal -->
+	<div id="createPostModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 3000; justify-content: center; align-items: center;">
+	  <div class="modal-content" style="max-width: 500px;">
+		<h2>Create Post</h2>
+		<div class="form-group">
+		  <label for="postTitle">Title:</label>
+		  <input type="text" id="postTitle" name="postTitle">
+		</div>
+		<div class="form-group">
+		  <label for="postContent">Content:</label>
+		  <textarea id="postContent" name="postContent" rows="6" style="width: 100%;"></textarea>
+		</div>
+		<div class="form-group">
+		  <label for="postAttachment">Attachment (Images only):</label>
+		  <input type="file" id="postAttachment" name="postAttachment" accept="image/*">
+		</div>
+		<div class="button-group">
+		  <button type="button" id="btnUploadPost">Upload</button>
+		  <button type="button" id="btnPostCancel">Cancel</button>
+		</div>
+	  </div>
+	</div>
+
 
   <!-- Footer -->
   <footer>
@@ -117,8 +336,9 @@
     <div class="right">
       <table class="names-table">
         <tr>
-			<td>Created by:</td>
-		</tr>
+          <td>Created by:</td>
+        </tr>
+        <tr>
           <td>Justine Angelo A. Gino,</td>
           <td>Marzel Carreon,</td>
           <td>Hazel,</td>
@@ -127,21 +347,151 @@
       </table>
     </div>
   </footer>
+  
+  <script>
+    // Global variables
+    const modal = document.getElementById("createAccountModal");
+    const confirmModal = document.getElementById("confirmationModal");
 
-	<script src="https://js.puter.com/v2/"></script>
-<script>
-    function updateResponse() {
-        puter.ai.chat("What are the benefits of exercise?")
-            .then(response => {
-                document.getElementById("response-container").innerText = response;
-            });
+    // Function to open modal
+    function openModal() {
+      modal.style.display = "flex";
     }
 
-    // Call the function immediately
-    updateResponse();
+    // Function to close modal
+    function closeModal() {
+      modal.style.display = "none";
+    }
 
-    // Call the function every 10 seconds (10000 milliseconds)
-    setInterval(updateResponse, 10000);
-</script>
+    // Function to open confirmation modal
+    function openConfirmationModal() {
+      confirmModal.style.display = "flex";
+    }
+
+    // Function to close confirmation modal
+    function closeConfirmationModal() {
+      confirmModal.style.display = "none";
+    }
+
+    // Attach click event to the Create Account button in the header to open the modal
+    document.getElementById("btnOpenCreateAccount").addEventListener("click", openModal);
+
+    // Close modal when clicking the Cancel button
+    document.getElementById("btnCancel").addEventListener("click", closeModal);
+
+    // Close modal when clicking outside the modal content
+    modal.addEventListener("click", function(event) {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    // Toggle password visibility when the checkbox is changed
+    document.getElementById("cbshowpassword").addEventListener("change", function() {
+      const passwordInput = document.getElementById("txtpassword");
+      passwordInput.type = this.checked ? "text" : "password";
+    });
+
+    // When the Create Account button inside the modal is clicked
+    document.getElementById("btnCreateAccount").addEventListener("click", function() {
+      openConfirmationModal();
+    });
+
+    // Yes button in confirmation modal
+    document.getElementById("btnYes").addEventListener("click", function() {
+		alert("Account creation complete.");
+      closeConfirmationModal();
+      closeModal();
+    });
+
+    // No button in confirmation modal
+    document.getElementById("btnNo").addEventListener("click", function() {
+      closeConfirmationModal();
+    });
+
+    // Close confirmation modal when clicking outside of its content
+    confirmModal.addEventListener("click", function(event) {
+      if (event.target === confirmModal) {
+        closeConfirmationModal();
+      }
+    });
+	
+	// Login Modal Variables and Functions
+	const loginModal = document.getElementById("loginModal");
+
+	function openLoginModal() {
+	  loginModal.style.display = "flex";
+	}
+
+	function closeLoginModal() {
+	  loginModal.style.display = "none";
+	}
+
+	// Create Post Modal Variables and Functions
+	const createPostModal = document.getElementById("createPostModal");
+
+	function openCreatePostModal() {
+	  createPostModal.style.display = "flex";
+	}
+
+	function closeCreatePostModal() {
+	  createPostModal.style.display = "none";
+	}
+
+	// Attach event listeners for Login Modal
+	document.getElementById("btnLoginCancel").addEventListener("click", closeLoginModal);
+	document.getElementById("btnLogin").addEventListener("click", function() {
+	  // Insert login logic here
+	  alert("Logged in (demo).");
+	  closeLoginModal();
+	});
+
+	// Attach event listeners for Create Post Modal
+	document.getElementById("btnPostCancel").addEventListener("click", closeCreatePostModal);
+	document.getElementById("btnUploadPost").addEventListener("click", function() {
+	  // Insert post upload logic here
+	  alert("Post uploaded (demo).");
+	  closeCreatePostModal();
+	});
+
+	// Example: Attach event listeners to header buttons (adjust selectors as needed)
+	// Assuming header buttons order: [Create Post, Create Account, Login]
+	document.querySelector('header .buttons button:nth-child(3)').addEventListener("click", openLoginModal);
+	document.querySelector('header .buttons button:first-child').addEventListener("click", openCreatePostModal);
+
+	// Close modals when clicking outside the modal content
+	loginModal.addEventListener("click", function(e) {
+	  if (e.target === loginModal) closeLoginModal();
+	});
+	createPostModal.addEventListener("click", function(e) {
+	  if (e.target === createPostModal) closeCreatePostModal();
+	});
+	
+	// Function to open achievement modal
+  function openAchievementModal(modalId) {
+    document.getElementById(modalId).style.display = "flex";
+  }
+  // Attach event listeners to achievement items
+  document.querySelectorAll('.achievement-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      openAchievementModal(item.getAttribute('data-modal'));
+    });
+  });
+  // Attach event listeners to close buttons in achievement modals
+  document.querySelectorAll('.achievement-modal .close-button').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      btn.closest('.achievement-modal').style.display = "none";
+    });
+  });
+  // Close modal when clicking outside modal content
+  document.querySelectorAll('.achievement-modal').forEach(function(modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  });
+  </script>
 </body>
 </html>
